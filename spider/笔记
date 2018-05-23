@@ -1,0 +1,11 @@
+## Scrapy
+>[参考网址](https://blog.csdn.net/jasonding1354/article/details/43115831)
+
+写的足够清楚，希望能够详细看，不懂之处再看，本文档的代码
+### 基本步骤
+1.建立scrapy项目
+    
+    srapy startproject [projectname]
+2.进入项目目录，生成蜘蛛
+
+    scrapy genspider [-t template] [spidername] [domain]
