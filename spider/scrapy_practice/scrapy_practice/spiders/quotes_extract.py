@@ -15,6 +15,10 @@ class QuetosExtractSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
+
+        """下面代码的含义是，将html中<div class="quote">内包含的
+        <text><author><tags>都保存到items中"""
+
         for quote in response.css('div.quote'):
             yield {
                 'text': quote.css('span.text::text').extract_first(),
@@ -23,9 +27,6 @@ class QuetosExtractSpider(scrapy.Spider):
             }
 
         """
-        上面代码的含义是，将html中<div class="quote">内包含的
-        <text><author><tags>都保存到items中
-
         并且在外加命令 scrapy crawl quotes -o quotes.json 后
         保存到名为quotes.json的文件中
         """

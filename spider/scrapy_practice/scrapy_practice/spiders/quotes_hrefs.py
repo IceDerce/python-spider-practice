@@ -29,6 +29,7 @@ class AuthorSpider(scrapy.Spider):
             """
             return response.css(query).extract_first().strip()
 
+        # 注意看这里的extract方式，和前面的方式有所区别
         yield {
             'name': extract_with_css('h3.author-title::text'),
             'birthdate': extract_with_css('.author-born-date::text'),

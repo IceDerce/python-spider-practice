@@ -2,10 +2,17 @@
 import scrapy
 '''保存爬取页面为html'''
 
+
 class QuotesSpider(scrapy.Spider):
     name = "quotes"
 
     def start_requests(self):
+        """
+        多网页爬取的请求（静态多网页，需要提前输入）
+
+        :return: scrapy.Request对象，并且调用与请求相关的回调方法（parse）
+                ，将响应作为参数传递。
+        """
         urls = [
             'http://quotes.toscrape.com/page/1/',
             'http://quotes.toscrape.com/page/2/',

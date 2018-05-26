@@ -19,7 +19,7 @@ class DemoSpider(scrapy.Spider):
         :return:
         """
         # 这个函数从response.url中提取倒数第一个斜杠之后的部分
-        # 比如http://www.abc.com/123.zip，得到文件名123.zip
+        # 比如http://www.abc.com/ 123.zip，得到文件名123.zip
         fname = response.url.split('/')[-1]
         # 打开这个文件读取内容，并且将它返回，作为response.body输出
         with open(fname, 'wb') as f:

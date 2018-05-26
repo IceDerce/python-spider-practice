@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-'''顺页面顺序爬取'''
+'''翻页爬取，多页面爬取'''
 
 
 class QuetosPagesSpider(scrapy.Spider):
@@ -22,7 +22,7 @@ class QuetosPagesSpider(scrapy.Spider):
 
         使用scrapy crawl quetos_pages -o queto_pages.json 命令输出结果
         """
-
+        # 爬取下一页的链接信息
         next_page = response.css('li.next a::attr(href)').extract_first()
         if next_page is not None:
             next_page = response.urljoin(next_page)
@@ -42,3 +42,7 @@ class QuetosPagesSpider(scrapy.Spider):
         """
         for href in response.css('li.next a::attr(href)'):
             yield response.follow(href, callback=self.parse)
+
+        """如果是在<a>标签中的链接（一般的链接都放在其中），则有下述的缩略方式"""
+        for a in response.css("li.next a"):
+            yield response.follow(a, callback=self.parse)
